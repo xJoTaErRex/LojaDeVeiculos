@@ -57,7 +57,7 @@ public class Compra {
         this.idVeiculo = idVeiculo;
     }
     
-    
+    //Metodo toString
     @Override
    	public String toString() {
    		return "Compra [idCompra=" + idCompra + ", valor=" + valor + ", dataCompra=" + dataCompra + ", idVeiculo="
