@@ -2,7 +2,7 @@ package lv.model;
 
 public class Usuario {
 	
-    private int idUsuario;
+    private int idUsuario = 0;
     private String nome;
     private String login;
     private String cargo;
@@ -10,24 +10,28 @@ public class Usuario {
     private boolean verif_ADM;
    
    //Construtores
-   public Usuario(int idUsuario, String nome, String login,
-                      String cargo, String senha, boolean verif_ADM){
-            super();
-            this.idUsuario = idUsuario;
-            this.nome = nome;
-            this.login = login;
-            this.cargo = cargo;
-            this.senha = senha;
-            this.verif_ADM = verif_ADM;
-    }
+	public Usuario(String nome, String login, String cargo, String senha, boolean verif_ADM) {
+		super();
+		this.nome = nome;
+		this.login = login;
+		this.cargo = cargo;
+		this.senha = senha;
+		this.verif_ADM = verif_ADM;
+	}
+
+	public Usuario(String nome, String login, String cargo, String senha) {
+		super();
+		this.nome = nome;
+		this.login = login;
+		this.cargo = cargo;
+		this.senha = senha;
+	}
    
 	public Usuario() {
 		super();
 	}
 
-	
-	
-    //Id
+	//Id
     public int getIdUsuario() {
         return idUsuario;
     }
@@ -78,6 +82,12 @@ public class Usuario {
     public void setVerif_ADM(boolean verif_ADM) {
         this.verif_ADM = verif_ADM;
     }
+    
+    @Override
+	public String toString() {
+		return "Usuario [idUsuario=" + idUsuario + ", nome=" + nome + ", login=" + login + ", cargo=" + cargo
+				+ ", senha=" + senha + ", verif_ADM=" + verif_ADM + "]";
+	}
     
     
 }
