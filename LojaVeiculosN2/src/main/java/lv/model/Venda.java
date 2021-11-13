@@ -1,6 +1,7 @@
 package lv.model;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class Venda {
 
@@ -12,15 +13,21 @@ public class Venda {
     
 
     //Contrutores
-    public Venda(int idVenda, double valor, Date dataVenda, 
-                     int idVeiculo, String nomeVendedor){
+    public Venda(double valor, int idVeiculo, String nomeVendedor, Date dataVenda){
             super();
-            this.idVenda = idVenda;
             this.valor = valor;
-            this.dataVenda = dataVenda;
             this.idVeiculo = idVeiculo;
             this.nomeVendedor = nomeVendedor;
+            this.dataVenda = dataVenda;
     }
+
+	public Venda(String valor, String idVeiculo, String nomeVendedor, String dataVenda) {
+		super();
+		setValor(valor);
+		setIdVeiculo(idVeiculo);
+		this.nomeVendedor = nomeVendedor;
+		setDataVenda(dataVenda);
+	}
 
 	public Venda() {
 		super();
@@ -34,6 +41,9 @@ public class Venda {
     public void setIdVenda(int idVenda) {
         this.idVenda = idVenda;
     }
+    public void setIdVenda(String idVenda) {
+    	setIdVenda(Integer.parseInt(idVenda));
+	}
     
     //Valor
     public double getValor() {
@@ -42,6 +52,9 @@ public class Venda {
     public void setValor(double valor) {
         this.valor = valor;
     }
+    public void setValor(String valor) {	
+		setValor(Double.valueOf(valor));
+	}
 
 
     //DataVenda
@@ -51,6 +64,16 @@ public class Venda {
     public void setDataVenda(Date dataVenda) {
         this.dataVenda = dataVenda;
     }
+    public void setDataVenda(String dataVenda) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			this.setDataVenda(dateFormat.parse(dataVenda));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.err.println("erro, data errada");
+		} 
+	}
 
     
     //IdVeiculo
@@ -60,6 +83,9 @@ public class Venda {
     public void setIdVeiculo(int idVeiculo) {
         this.idVeiculo = idVeiculo;
     }
+    public void setIdVeiculo(String idCompra) {
+    	setIdVeiculo(Integer.parseInt(idCompra));
+	}
     
 
     //Nome Vendedor
