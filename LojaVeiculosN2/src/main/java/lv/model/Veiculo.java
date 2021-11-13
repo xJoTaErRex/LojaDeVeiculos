@@ -1,6 +1,7 @@
 package lv.model;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class Veiculo {
 
@@ -21,8 +22,7 @@ public class Veiculo {
    //Construtores
    public Veiculo(String modelo, String marca, String motorizacao, String cor,
                       double precoVenda, int ano, int kilometragem, String opcionais, String observacoes,
-                      Date dataEntrada, 
-                     int idVeiculo, int unidadeEmEstoque){
+                      Date dataEntrada, int unidadeEmEstoque){
             super();
             this.modelo = modelo;
             this.marca = marca;
@@ -34,11 +34,23 @@ public class Veiculo {
             this.opcionais = opcionais;
             this.observacoes = observacoes;
             this.dataEntrada = dataEntrada;
-            this.idVeiculo = idVeiculo;
             this.unidadeEmEstoque = unidadeEmEstoque;
     }
-   
-
+	public Veiculo(String modelo, String marca, String motorizacao, String cor, String precoVenda, String ano,
+			String kilometragem, String opcionais, String observacoes, String dataEntrada, String unidadeEmEstoque) {
+		super();
+		this.setModelo(modelo);
+		this.setMarca(marca);
+		this.setMotorizacao(motorizacao);
+		this.setCor(cor);
+		this.setPrecoVenda(precoVenda);
+		this.setAno(ano);
+		this.setKilometragem(ano);
+		this.setOpcionais(opcionais);
+		this.setObservacoes(observacoes);
+		this.setDataEntrada(dataEntrada);
+		this.setUnidadeEmEstoque(unidadeEmEstoque);
+	}
 
     public Veiculo(){
 		super();
@@ -94,6 +106,9 @@ public class Veiculo {
 	public void setPrecoVenda(double precoVenda) {
 		this.precoVenda = precoVenda;
 	}
+	public void setPrecoVenda(String precoVenda) {	
+		setPrecoVenda(Double.valueOf(precoVenda));
+	}
 	
 	//Ano
 	public int getAno() {
@@ -102,6 +117,9 @@ public class Veiculo {
 	public void setAno(int ano) {
 		this.ano = ano;
 	}
+	public void setAno(String ano) {
+		setAno(Integer.parseInt(ano));
+	}
 	
 	//Kilometragem
 	public int getKilometragem() {
@@ -109,6 +127,9 @@ public class Veiculo {
 	}
 	public void setKilometragem(int kilometragem) {
 		this.kilometragem = kilometragem;
+	}
+	public void setKilometragem(String km) {
+		setAno(Integer.parseInt(km));
 	}
 	
 	//Opcionais
@@ -134,6 +155,9 @@ public class Veiculo {
 	public void setUnidadeEmEstoque(int unidadeEmEstoque) {
 		this.unidadeEmEstoque = unidadeEmEstoque;
 	}
+	public void  setUnidadeEmEstoque(String unidades) {
+		setUnidadeEmEstoque(Integer.parseInt(unidades));
+	}
 	
 	//Data de Entrada
 	public Date getDataEntrada() {
@@ -141,6 +165,16 @@ public class Veiculo {
 	}
 	public void setDataEntrada(Date dataEntrada) {
 		this.dataEntrada = dataEntrada;
+	}
+	public void setDataEntrada(String dataEntrada) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			this.setDataEntrada((Date) dateFormat.parse(dataEntrada));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.err.println("erro, data errada");
+		} 
 	}
 	
 	
