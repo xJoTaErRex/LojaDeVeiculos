@@ -30,5 +30,21 @@ public class CompraDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public void delete(Compra compra) {
+
+		try {
+
+			PreparedStatement preparedStatement = conexao.prepareStatement(
+					"delete from lojaveiculos.compra where idCompra = ?");
+
+			preparedStatement.setInt(1, compra.getIdCompra());
+
+			preparedStatement.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 }
