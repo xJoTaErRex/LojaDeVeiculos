@@ -38,6 +38,9 @@ public class Usuario {
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
+    public void setIdUsuario(String idUsuario) {
+    	setIdUsuario(Integer.parseInt(idUsuario));
+	}
     
     //Nome
     public String getNome() {

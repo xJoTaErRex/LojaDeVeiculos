@@ -1,6 +1,6 @@
 package lv.model;
 
-import java.sql.Date;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 
 public class Veiculo {
@@ -65,6 +65,9 @@ public class Veiculo {
 	}
 	public void setIdVeiculo(int idVeiculo) {
 		this.idVeiculo = idVeiculo;
+	}
+	public void setIdVeiculo(String idVeiculo) {
+    	setIdVeiculo(Integer.parseInt(idVeiculo));
 	}
 	
 	//Modelo
@@ -156,7 +159,12 @@ public class Veiculo {
 		this.unidadeEmEstoque = unidadeEmEstoque;
 	}
 	public void  setUnidadeEmEstoque(String unidades) {
-		setUnidadeEmEstoque(Integer.parseInt(unidades));
+		try {
+			setUnidadeEmEstoque(Integer.valueOf(unidades));
+		   } 
+		   catch (NumberFormatException e) { 
+			   setUnidadeEmEstoque(0);
+		   }
 	}
 	
 	//Data de Entrada
@@ -169,7 +177,7 @@ public class Veiculo {
 	public void setDataEntrada(String dataEntrada) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		try {
-			this.setDataEntrada((Date) dateFormat.parse(dataEntrada));
+			this.setDataEntrada(dateFormat.parse(dataEntrada));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
