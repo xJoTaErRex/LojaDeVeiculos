@@ -7,6 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lv.dao.UsuarioDAO;
+import lv.model.Usuario;
 
 /**
  * Servlet implementation class CrudApi
@@ -50,7 +52,24 @@ public class CrudApi extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		Usuario u = new Usuario(
+				request.getParameter("name"),
+				request.getParameter("login"),
+				request.getParameter("cargo"),
+				request.getParameter("senha")
+				);
+		
+		UsuarioDAO dao;
+		try {
+			dao = new UsuarioDAO();
+			dao.insert(u);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		response.getWriter().append("inserido\n" + u.toString());
 	}
 
 	/**
