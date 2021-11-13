@@ -7,20 +7,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lv.dao.UsuarioDAO;
-import lv.model.Usuario;
+
+import lv.dao.VeiculoDAO;
+import lv.model.Veiculo;
+
+
 
 /**
- * Servlet implementation class CrudApi
+ * Servlet implementation class VeiculoApi
  */
-@WebServlet("/CrudApi")
-public class CrudApi extends HttpServlet {
+@WebServlet("/VeiculoApi")
+public class VeiculoApi extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CrudApi() {
+    public VeiculoApi() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -53,23 +56,29 @@ public class CrudApi extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		Usuario u = new Usuario(
-				request.getParameter("name"),
-				request.getParameter("login"),
-				request.getParameter("cargo"),
-				request.getParameter("senha")
+		Veiculo v = new Veiculo(
+				request.getParameter("modelo"),
+				request.getParameter("marca"),
+				request.getParameter("motorizacao"),
+				request.getParameter("cor"),
+				request.getParameter("precoVenda"),
+				request.getParameter("ano"),
+				request.getParameter("km"),
+				request.getParameter("opcionais"),
+				request.getParameter("observacoes"),
+				request.getParameter("dataEntrada"),
+				request.getParameter("unidadeeEstoque")
 				);
 		
-		UsuarioDAO dao;
+		VeiculoDAO dao;
 		try {
-			dao = new UsuarioDAO();
-			dao.insert(u);
+			dao = new VeiculoDAO();
+			dao.insert(v);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		response.getWriter().append("inserido\n" + u.toString());
 	}
 
 	/**
