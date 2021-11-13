@@ -3,6 +3,8 @@ package lv.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import lv.model.Compra;
 import lv.model.Venda;
 
 public class VendaDAO {
@@ -18,12 +20,28 @@ public class VendaDAO {
 		try {
 
 			PreparedStatement preparedStatement = conexao.prepareStatement(
-					"insert into lojaveiculos.venda (Valor, IdVeiculo, NomeVendedor, DataCompra) values (?, ?, ?, ?) ");
+					"insert into lojaveiculos.venda (Valor, IdVeiculo, NomeVendedor, DataVenda) values (?, ?, ?, ?) ");
 
 			preparedStatement.setDouble(1, venda.getValor());
 			preparedStatement.setInt(2, venda.getIdVeiculo());
 			preparedStatement.setString(3, venda.getNomeVendedor());
 			preparedStatement.setDate(4,  new java.sql.Date(venda.getDataVenda().getTime()));
+
+			preparedStatement.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void delete(Venda venda) {
+
+		try {
+
+			PreparedStatement preparedStatement = conexao.prepareStatement(
+					"delete from lojaveiculos.venda where idVenda = ?");
+
+			preparedStatement.setInt(1, venda.getIdVenda());
 
 			preparedStatement.executeUpdate();
 

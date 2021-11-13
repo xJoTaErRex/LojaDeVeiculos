@@ -1,6 +1,7 @@
 package lv.model;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class Compra {
 
@@ -11,14 +12,18 @@ public class Compra {
     
 
     //Construtores
-	public Compra(int idCompra, double valor, Date dataCompra, int idVeiculo) {
+	public Compra(double valor, Date dataCompra, int idVeiculo) {
 		super();
-		this.idCompra = idCompra;
 		this.valor = valor;
 		this.dataCompra = dataCompra;
 		this.idVeiculo = idVeiculo;
 	}
-
+	public Compra(String valor, String dataCompra, String idVeiculo) {
+		super();
+		setValor(valor);;
+	    setDataCompra(dataCompra);
+		setIdVeiculo(idVeiculo);;
+	}
 	public Compra() {
 		super();
 	}
@@ -31,6 +36,9 @@ public class Compra {
     public void setIdCompra(int idCompra) {
         this.idCompra = idCompra;
     }
+    public void setIdCompra(String idCompra) {
+    	setIdCompra(Integer.parseInt(idCompra));
+	}
     
     //Valor
     public double getValor() {
@@ -39,6 +47,9 @@ public class Compra {
     public void setValor(double valor) {
         this.valor = valor;
     }
+    public void setValor(String valor) {	
+		setValor(Double.valueOf(valor));
+	}
 
 
     //Data da Compra
@@ -48,6 +59,16 @@ public class Compra {
     public void setDataCompra(Date dataCompra) {
         this.dataCompra = dataCompra;
     }
+    public void setDataCompra(String dataCompra) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			this.setDataCompra(dateFormat.parse(dataCompra));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.err.println("erro, data errada");
+		} 
+	}
     
     //Id do Veiculo
     public int getIdVeiculo() {
@@ -56,6 +77,9 @@ public class Compra {
     public void setIdVeiculo(int idVeiculo) {
         this.idVeiculo = idVeiculo;
     }
+    public void setIdVeiculo(String idVeiculo) {
+    	setIdVeiculo(Integer.parseInt(idVeiculo));
+	}
     
     //Metodo toString
     @Override

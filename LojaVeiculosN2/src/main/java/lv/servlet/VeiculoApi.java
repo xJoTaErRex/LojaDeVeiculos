@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lv.dao.CompraDAO;
 import lv.dao.VeiculoDAO;
+import lv.model.Compra;
 import lv.model.Veiculo;
 
 
@@ -59,7 +61,7 @@ public class VeiculoApi extends HttpServlet {
 		Veiculo v = new Veiculo(
 				request.getParameter("modelo"),
 				request.getParameter("marca"),
-				request.getParameter("motorizacao"),
+				request.getParameter("motor"),
 				request.getParameter("cor"),
 				request.getParameter("precoVenda"),
 				request.getParameter("ano"),
@@ -67,7 +69,7 @@ public class VeiculoApi extends HttpServlet {
 				request.getParameter("opcionais"),
 				request.getParameter("observacoes"),
 				request.getParameter("dataEntrada"),
-				request.getParameter("unidadeeEstoque")
+				request.getParameter("unidadeEstoque")
 				);
 		
 		VeiculoDAO dao;
@@ -78,6 +80,8 @@ public class VeiculoApi extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		response.getWriter().append("inserido\n" + v.toString());
 		
 	}
 
@@ -93,6 +97,20 @@ public class VeiculoApi extends HttpServlet {
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		Veiculo v = new Veiculo();
+		v.setIdVeiculo(request.getParameter("idVeiculo"));
+		
+		VeiculoDAO dao;
+		try {
+			dao = new VeiculoDAO();
+			dao.delete(v);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		response.getWriter().append("Deletado");
 	}
 
 }
