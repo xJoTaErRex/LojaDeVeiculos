@@ -51,6 +51,23 @@ public class Veiculo {
 		this.setDataEntrada(dataEntrada);
 		this.setUnidadeEmEstoque(unidadeEmEstoque);
 	}
+	
+	public Veiculo(String idVeiculo, String modelo, String marca, String motorizacao, String cor, String precoVenda, String ano,
+			String kilometragem, String opcionais, String observacoes, String dataEntrada, String unidadeEmEstoque) {
+		super();
+		this.setIdVeiculo(idVeiculo);
+		this.setModelo(modelo);
+		this.setMarca(marca);
+		this.setMotorizacao(motorizacao);
+		this.setCor(cor);
+		this.setPrecoVenda(precoVenda);
+		this.setAno(ano);
+		this.setKilometragem(ano);
+		this.setOpcionais(opcionais);
+		this.setObservacoes(observacoes);
+		this.setDataEntrada(dataEntrada);
+		this.setUnidadeEmEstoque(unidadeEmEstoque);
+	}
 
     public Veiculo(){
 		super();

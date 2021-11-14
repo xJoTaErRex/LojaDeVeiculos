@@ -1,12 +1,16 @@
 package lv.servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 
 import lv.dao.CompraDAO;
 import lv.model.Compra;
@@ -45,7 +49,43 @@ public class CompraApi extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setStatus(418);
+
+		String compraId = request.getParameter("idCompra");
+		
+	    if(compraId != null) {
+	    	int id = Integer.parseInt(compraId);
+	    	
+	    	CompraDAO compraDao;
+			try {
+				compraDao = new CompraDAO();
+				
+				Compra compra = compraDao.getCompraById(id);
+		     	Gson gson = new Gson();
+		    	response.getWriter().append(gson.toJson(compra));
+		    	
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+	    } else {
+	    	
+	    	CompraDAO compraDao;
+			try {
+				compraDao = new CompraDAO();
+				
+				List<Compra> compras = compraDao.getAllCompras();
+		        
+		    	Gson gson = new Gson();
+
+		    	response.getWriter().append(gson.toJson(compras));
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	
+	    } 
 	}
 
 	/**
@@ -77,6 +117,23 @@ public class CompraApi extends HttpServlet {
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		Compra c = new Compra(
+				request.getParameter("idCompra"),
+				request.getParameter("valor"),
+				request.getParameter("dataCompra"),
+				request.getParameter("idVeiculo")
+				);
+		
+		CompraDAO dao;
+		try {
+			dao = new CompraDAO();
+			dao.update(c);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		response.getWriter().append("Atualizado\n" + c.toString());
 	}
 
 	/**
