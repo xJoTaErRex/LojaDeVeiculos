@@ -1,12 +1,16 @@
 package lv.servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 
 import lv.dao.CompraDAO;
 import lv.dao.VeiculoDAO;
@@ -49,7 +53,44 @@ public class VeiculoApi extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setStatus(418);
+
+		String veiculoId = request.getParameter("idVeiculo");
+		
+	    if(veiculoId != null) {
+	    	int id = Integer.parseInt(veiculoId);
+	    	
+	    	VeiculoDAO veiculoDao;
+			try {
+				veiculoDao = new VeiculoDAO();
+				
+				Veiculo veiculo = veiculoDao.getVeiculoById(id);
+		     	Gson gson = new Gson();
+		    	response.getWriter().append(gson.toJson(veiculo));
+		    	
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+	    } else {
+	    	
+	    	VeiculoDAO veiculoDao;
+			try {
+				veiculoDao = new VeiculoDAO();
+				
+				List<Veiculo> veiculos = veiculoDao.getAllVeiculos();
+		        
+		    	Gson gson = new Gson();
+
+		    	response.getWriter().append(gson.toJson(veiculos));
+		    	
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	
+	    } 
 	}
 
 	/**
@@ -90,6 +131,32 @@ public class VeiculoApi extends HttpServlet {
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		Veiculo v = new Veiculo(
+				request.getParameter("idVeiculo"),
+				request.getParameter("modelo"),
+				request.getParameter("marca"),
+				request.getParameter("motor"),
+				request.getParameter("cor"),
+				request.getParameter("precoVenda"),
+				request.getParameter("ano"),
+				request.getParameter("km"),
+				request.getParameter("opcionais"),
+				request.getParameter("observacoes"),
+				request.getParameter("dataEntrada"),
+				request.getParameter("unidadeEstoque")
+				);
+		
+		VeiculoDAO dao;
+		try {
+			dao = new VeiculoDAO();
+			dao.update(v);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		response.getWriter().append("Alterado\n" + v.toString());
 	}
 
 	/**

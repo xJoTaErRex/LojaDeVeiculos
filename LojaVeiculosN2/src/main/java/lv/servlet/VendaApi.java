@@ -1,12 +1,16 @@
 package lv.servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 
 import lv.dao.CompraDAO;
 import lv.dao.VendaDAO;
@@ -47,7 +51,41 @@ public class VendaApi extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String vendaId = request.getParameter("idVenda");
+
+		if (vendaId != null) {
+			int id = Integer.parseInt(vendaId);
+
+			VendaDAO vendaDao;
+			try {
+				vendaDao = new VendaDAO();
+
+				Venda venda = vendaDao.getVendaById(id);
+				Gson gson = new Gson();
+				response.getWriter().append(gson.toJson(venda));
+
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} else {
+
+			VendaDAO vendaDao;
+			try {
+				vendaDao = new VendaDAO();
+
+				List<Venda> vendas = vendaDao.getAllVendas();
+
+				Gson gson = new Gson();
+
+				response.getWriter().append(gson.toJson(vendas));
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
 	}
 
 	/**
@@ -80,6 +118,25 @@ public class VendaApi extends HttpServlet {
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		Venda v = new Venda(
+				request.getParameter("idVenda"),
+				request.getParameter("valor"),
+				request.getParameter("idVeiculo"),
+				request.getParameter("nomeVendedor"),
+				request.getParameter("dataCompra")
+				);
+		
+		VendaDAO dao;
+		try {
+			dao = new VendaDAO();
+			dao.update(v);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		response.getWriter().append("Alterado\n" + v.toString());
 	}
 
 	/**
