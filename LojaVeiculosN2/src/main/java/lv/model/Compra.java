@@ -20,12 +20,19 @@ public class Compra {
 	}
 	public Compra(String valor, String dataCompra, String idVeiculo) {
 		super();
-		setValor(valor);;
+		setValor(valor);
 	    setDataCompra(dataCompra);
-		setIdVeiculo(idVeiculo);;
+		setIdVeiculo(idVeiculo);
 	}
 	public Compra() {
 		super();
+	}
+	public Compra(String id, String valor, String dataCompra, String idVeiculo) {
+		super();
+		setIdCompra(id);
+		setValor(valor);
+	    setDataCompra(dataCompra);
+		setIdVeiculo(idVeiculo);
 	}
 	
 	
