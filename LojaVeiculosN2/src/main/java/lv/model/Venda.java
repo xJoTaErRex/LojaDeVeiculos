@@ -23,10 +23,20 @@ public class Venda {
 
 	public Venda(String valor, String idVeiculo, String nomeVendedor, String dataVenda) {
 		super();
-		setValor(valor);
-		setIdVeiculo(idVeiculo);
+		this.setValor(valor);
+		this.setIdVeiculo(idVeiculo);
 		this.nomeVendedor = nomeVendedor;
-		setDataVenda(dataVenda);
+		this.setDataVenda(dataVenda);
+	}
+	
+	public Venda(String idVenda, String valor, String idVeiculo, String nomeVendedor, String dataVenda) {
+		super();
+		
+		this.setIdVenda(idVenda);
+		this.setValor(valor);
+		this.setIdVeiculo(idVeiculo);
+		this.nomeVendedor = nomeVendedor;
+		this.setDataVenda(dataVenda);
 	}
 
 	public Venda() {

@@ -1,6 +1,8 @@
 package lv.servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,9 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import lv.dao.CompraDAO;
+import com.google.gson.Gson;
+
 import lv.dao.UsuarioDAO;
-import lv.model.Compra;
 import lv.model.Usuario;
 
 /**
@@ -47,7 +49,43 @@ public class UserApi extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setStatus(418);
+
+		String userId = request.getParameter("idUser");
+		
+	    if(userId != null) {
+	    	int id = Integer.parseInt(userId);
+	    	
+	    	UsuarioDAO usuarioDao;
+			try {
+				usuarioDao = new UsuarioDAO();
+				
+				Usuario usuario = usuarioDao.getUsuarioById(id);
+		     	Gson gson = new Gson();
+		    	response.getWriter().append(gson.toJson(usuario));
+		    	
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+	    } else {
+	    	
+	    	UsuarioDAO usuarioDao;
+			try {
+				usuarioDao = new UsuarioDAO();
+				
+				List<Usuario> usuarios = usuarioDao.getAllUsuario();
+		        
+		    	Gson gson = new Gson();
+
+		    	response.getWriter().append(gson.toJson(usuarios));
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	
+	    } 
 	}
 
 	/**
