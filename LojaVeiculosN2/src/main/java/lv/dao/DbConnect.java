@@ -18,7 +18,8 @@ public class DbConnect {
 				
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				
-				conexao = DriverManager.getConnection("jdbc:mysql://localhost/ftt","root","12345678");
+				conexao = DriverManager.getConnection("jdbc:mysql://remotemysql.com/YMCg3mgime","YMCg3mgime","h625S5MsY7");
+				//conexao = DriverManager.getConnection("jdbc:mysql://localhost/ftt","root","12345678");
 				//conexao = DriverManager.getConnection("jdbc:mysql://localhost/ftt","root","12345678");  João
 				//conexao = DriverManager.getConnection("jdbc:mysql://localhost/ftt","root","12345678");  Vinicius
 				//conexao = DriverManager.getConnection("jdbc:mysql://localhost/ftt","root","12345678");  Caio

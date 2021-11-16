@@ -23,7 +23,7 @@ public class UsuarioDAO {
 		try {
 
 			PreparedStatement preparedStatement = conexao.prepareStatement(
-					"insert into lojaveiculos.user (Nome, Login, Cargo, VerifADM, Senha) values (?, ?, ?, ?, ?) ");
+					"insert into YMCg3mgime.User (Nome, Login, Cargo, VerifADM, Senha) values (?, ?, ?, ?, ?) ");
 
 			preparedStatement.setString(1, user.getNome());
 			preparedStatement.setString(2, user.getLogin());
@@ -42,7 +42,7 @@ public class UsuarioDAO {
 		try {
 
 			PreparedStatement preparedStatement = conexao.prepareStatement(
-					"delete from lojaveiculos.user where idUser = ?");
+					"delete from YMCg3mgime.User where idUser = ?");
 
 			preparedStatement.setInt(1, user.getIdUsuario());
 
@@ -59,7 +59,7 @@ public class UsuarioDAO {
 
 		try {
 			Statement statement = conexao.createStatement();
-			ResultSet rs = statement.executeQuery("SELECT * FROM lojaveiculos.user");
+			ResultSet rs = statement.executeQuery("SELECT * FROM YMCg3mgime.User");
 			while (rs.next()) {
 
 				Usuario usuario = new Usuario();
@@ -96,7 +96,7 @@ public class UsuarioDAO {
 		Usuario usuarioOutput = new Usuario();
 
 		try {
-			PreparedStatement preparedStatement = conexao.prepareStatement("SELECT * from lojaveiculos.user WHERE idUser=?");
+			PreparedStatement preparedStatement = conexao.prepareStatement("SELECT * from YMCg3mgime.User WHERE idUser=?");
 
 			preparedStatement.setLong(1, usuario.getIdUsuario());
 			ResultSet rs = preparedStatement.executeQuery();

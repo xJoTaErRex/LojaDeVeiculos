@@ -11,10 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-
-import lv.dao.CompraDAO;
 import lv.dao.VeiculoDAO;
-import lv.model.Compra;
 import lv.model.Veiculo;
 
 

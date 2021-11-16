@@ -23,7 +23,7 @@ public class CompraDAO {
 		try {
 
 			PreparedStatement preparedStatement = conexao.prepareStatement(
-					"insert into lojaveiculos.compra (Valor, IdVeiculo, DataCompra) values (?, ?, ?) ");
+					"insert into YMCg3mgime.Compra (Valor, IdVeiculo, DataCompra) values (?, ?, ?) ");
 
 			preparedStatement.setDouble(1, compra.getValor());
 			preparedStatement.setInt(2, compra.getIdVeiculo());
@@ -41,7 +41,7 @@ public class CompraDAO {
 		try {
 
 			PreparedStatement preparedStatement = conexao.prepareStatement(
-					"delete from lojaveiculos.compra where idCompra = ?");
+					"delete from YMCg3mgime.Compra where idCompra = ?");
 
 			preparedStatement.setInt(1, compra.getIdCompra());
 
@@ -57,7 +57,7 @@ public class CompraDAO {
 		try {
 
 			PreparedStatement preparedStatement = conexao.prepareStatement(
-					"update lojaveiculos.compra set Valor=?, IdVeiculo=?, DataCompra=? where idCompra = ?");
+					"update YMCg3mgime.Compra set Valor=?, IdVeiculo=?, DataCompra=? where idCompra = ?");
 
 			preparedStatement.setDouble(1, compra.getValor());
 			preparedStatement.setInt(2, compra.getIdVeiculo());
@@ -78,7 +78,7 @@ public class CompraDAO {
 
 		try {
 			Statement statement = conexao.createStatement();
-			ResultSet rs = statement.executeQuery("SELECT * FROM lojaveiculos.compra");
+			ResultSet rs = statement.executeQuery("SELECT * FROM YMCg3mgime.Compra");
 			while (rs.next()) {
 
 				Compra compra = new Compra();
@@ -113,7 +113,7 @@ public class CompraDAO {
 		Compra compraOutput = new Compra();
 
 		try {
-			PreparedStatement preparedStatement = conexao.prepareStatement("SELECT * from lojaveiculos.compra WHERE idCompra=?");
+			PreparedStatement preparedStatement = conexao.prepareStatement("SELECT * from YMCg3mgime.Compra WHERE idCompra=?");
 
 			preparedStatement.setLong(1, compra.getIdCompra());
 			ResultSet rs = preparedStatement.executeQuery();
