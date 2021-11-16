@@ -22,7 +22,7 @@ public class VeiculoDAO {
 		try {
 
 			PreparedStatement preparedStatement = conexao.prepareStatement(
-					"insert into lojaveiculos.veiculo (Modelo, Marca, Motorizacao, Cor, PrecoVenda, "
+					"insert into YMCg3mgime.Veiculo (Modelo, Marca, Motorizacao, Cor, PrecoVenda, "
 					+ "Ano, Kilometragem, Opcionais, Observacoes, DataEntrada, UnidadeEmEstoque) "
 					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ");
 
@@ -50,7 +50,7 @@ public class VeiculoDAO {
 		try {
 
 			PreparedStatement preparedStatement = conexao.prepareStatement(
-					"delete from lojaveiculos.veiculo where idVeiculo = ?");
+					"delete from YMCg3mgime.Veiculo where idVeiculo = ?");
 
 			preparedStatement.setInt(1, veiculo.getIdVeiculo());
 
@@ -66,7 +66,7 @@ public class VeiculoDAO {
 		try {
 
 			PreparedStatement preparedStatement = conexao.prepareStatement(
-					"update lojaveiculos.veiculo set Modelo=?, Marca=?, Motorizacao=?, Cor=?, PrecoVenda=?, "
+					"update YMCg3mgime.Veiculo set Modelo=?, Marca=?, Motorizacao=?, Cor=?, PrecoVenda=?, "
 					+ "Ano=?, Kilometragem=?, Opcionais=?, Observacoes=?, DataEntrada=?, UnidadeEmEstoque=? "
 					+ "where idVeiculo =? ");
 
@@ -96,7 +96,7 @@ public class VeiculoDAO {
 
 		try {
 			Statement statement = conexao.createStatement();
-			ResultSet rs = statement.executeQuery("SELECT * FROM lojaveiculos.veiculo");
+			ResultSet rs = statement.executeQuery("SELECT * FROM YMCg3mgime.Veiculo");
 			while (rs.next()) {
 
 				Veiculo veiculo = new Veiculo();
@@ -139,7 +139,7 @@ public class VeiculoDAO {
 		Veiculo veiculoOutput = new Veiculo();
 
 		try {
-			PreparedStatement preparedStatement = conexao.prepareStatement("SELECT * from lojaveiculos.veiculo WHERE idVeiculo=?");
+			PreparedStatement preparedStatement = conexao.prepareStatement("SELECT * from YMCg3mgime.Veiculo WHERE idVeiculo=?");
 
 			preparedStatement.setLong(1, veiculo.getIdVeiculo());
 			ResultSet rs = preparedStatement.executeQuery();
